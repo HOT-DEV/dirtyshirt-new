@@ -1,0 +1,121 @@
+{
+  "sections": {
+    "hero": {
+      "type": "collection-image-with-title",
+      "settings": {
+        "show_title": true,
+        "show_description": true,
+        "text_color": "text-dark",
+        "flex_align": "align--middle-left",
+        "transparent": false,
+        "show_image": false,
+        "banner_layout": "overlay",
+        "height": "screen-height-one-third",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000"
+      }
+    },
+    "subcollections": {
+      "type": "subcollection",
+      "disabled": true,
+      "settings": {
+        "subcollection_layout": "grid",
+        "subcollection_description": false,
+        "select_image": "collection"
+      }
+    },
+    "main": {
+      "type": "collection",
+      "blocks": {
+        "6b1be551-131b-47d2-a511-52c6e71e5d18": {
+          "type": "featured_image",
+          "disabled": true,
+          "settings": {
+            "featured_image": "shopify:\/\/shop_images\/Bonfolk.jpg",
+            "featured_image_bg_position": "center-center",
+            "featured_heading": "Lagniappe Is For Stuffing Stockings",
+            "featured_text": "",
+            "featured_button_text": "",
+            "featured_button_link": "",
+            "featured_color_text": "#ffffff",
+            "featured_color_overlay": "#222222",
+            "featured_overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "6b1be551-131b-47d2-a511-52c6e71e5d18"
+      ],
+      "settings": {
+        "enable_sort": false,
+        "enable_filters": true,
+        "filter_layout": "slide-out",
+        "grid": 3,
+        "grid_mobile": "2",
+        "product_limit": 36,
+        "enable_reviews": false
+      }
+    },
+    "16370098029eb1a53a": {
+      "type": "section-collections-list",
+      "blocks": {
+        "16370098023bccb288-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "lagniappe",
+            "title": ""
+          }
+        },
+        "16370098023bccb288-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "for-the-home-1",
+            "title": ""
+          }
+        },
+        "16370098023bccb288-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "hats-beanies",
+            "title": ""
+          }
+        },
+        "16370098023bccb288-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "on-sale",
+            "title": ""
+          }
+        },
+        "632af9d7-a52f-46c6-bc6a-9b5f478d5f1f": {
+          "type": "collection",
+          "settings": {
+            "collection": "cold-weather",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "16370098023bccb288-0",
+        "16370098023bccb288-1",
+        "16370098023bccb288-2",
+        "16370098023bccb288-3",
+        "632af9d7-a52f-46c6-bc6a-9b5f478d5f1f"
+      ],
+      "settings": {
+        "title": "Collections",
+        "description": "",
+        "layout": "slider",
+        "aspect_ratio": 1,
+        "text_center": true,
+        "enable_slider": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "subcollections",
+    "main",
+    "16370098029eb1a53a"
+  ]
+}

@@ -1,0 +1,538 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "section-slideshow",
+      "blocks": {
+        "slideshow-1": {
+          "type": "image",
+          "settings": {
+            "bg_position": "center-center",
+            "image": "shopify:\/\/shop_images\/Screen_Shot_2021-09-30_at_12.40.46_PM.png",
+            "overlay_opacity": 40,
+            "overlay_color": "#000000",
+            "title": "Welcome to the New Site",
+            "description": "Kick the tires. We hope you like it.",
+            "flex_align": "align--middle-center",
+            "text_color": "text-light",
+            "transparent": true,
+            "link_text": "See Collections",
+            "link": "shopify:\/\/collections",
+            "button_color": "btn--white",
+            "button_style": "hero__btn btn btn--large caps"
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-1"
+      ],
+      "settings": {
+        "height": "screen-height-two-thirds",
+        "transition": "slide",
+        "arrows_style": true,
+        "dots_style": "line",
+        "autoplay": false,
+        "autoplay_speed": 8
+      }
+    },
+    "163552000869957c2e": {
+      "type": "section-announcement",
+      "blocks": {
+        "163552000869957c2e-0": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>FREE SHIPPING<\/strong> | Target to specific devices or referrers<\/p>",
+            "target_url_enabled": false,
+            "target_url": "",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "163552000869957c2e-2": {
+          "type": "message",
+          "settings": {
+            "show_wheel": true,
+            "message": "Spend ||amount|| more for free shipping.",
+            "target_url_enabled": false,
+            "target_url": "",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "163552000869957c2e-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>LAGNIAPPE COIN <\/strong>| On any order over $100<\/p>",
+            "target_url_enabled": false,
+            "target_url": "",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "163552000869957c2e-3": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>Create a scrolling marquee or a simple announcement<\/strong><\/p>",
+            "target_url_enabled": false,
+            "target_url": "",
+            "target_referrer_enabled": false,
+            "target_referrer": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "163552000869957c2e-0",
+        "163552000869957c2e-2",
+        "163552000869957c2e-1",
+        "163552000869957c2e-3"
+      ],
+      "settings": {
+        "bg_color": "#fed802",
+        "color": "#545454",
+        "layout": "marquee",
+        "speed": 7
+      }
+    },
+    "tabs": {
+      "type": "section-tab-collections",
+      "blocks": {
+        "tabs-0": {
+          "type": "collection",
+          "settings": {
+            "title": "The Hats",
+            "featured_collection": "hats-beanies",
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/ZSMITH-2021-09-24-07174_HiRes.jpg",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "description": "",
+            "text_color": "text-light",
+            "link_text": "See All Hats",
+            "link": "",
+            "button_color": "btn--white",
+            "button_style": "hero__btn btn btn--input caps"
+          }
+        },
+        "tabs-1": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "featured_collection": "shirts",
+            "show_image": true,
+            "image": "shopify:\/\/shop_images\/Untitled_design_44.png",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "description": "",
+            "text_color": "text-light",
+            "link_text": "View products",
+            "link": "",
+            "button_color": "btn--white",
+            "button_style": "hero__btn btn btn--large btn--outline caps"
+          }
+        },
+        "9c7983a2-a208-413d-9198-ff0c004710cc": {
+          "type": "collection",
+          "settings": {
+            "title": "",
+            "featured_collection": "socks",
+            "show_image": false,
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "description": "",
+            "text_color": "text-light",
+            "link_text": "View products",
+            "link": "",
+            "button_color": "btn--white",
+            "button_style": "hero__btn btn btn--large btn--outline caps"
+          }
+        }
+      },
+      "block_order": [
+        "tabs-0",
+        "tabs-1",
+        "9c7983a2-a208-413d-9198-ff0c004710cc"
+      ],
+      "settings": {
+        "title": "",
+        "enable_reviews": false
+      }
+    },
+    "featured-collection": {
+      "type": "section-collection",
+      "settings": {
+        "heading": "Stocking Stuffers",
+        "description": "<p>Dive into all the items that will surprise your people this holiday season.<\/p>",
+        "text_alignment": "inline",
+        "link_text": "Dive In",
+        "link_url": "shopify:\/\/collections\/lagniappe",
+        "button_color": "btn--black",
+        "button_style": "hero__btn btn btn--input caps",
+        "featured_collection": "lagniappe",
+        "grid": 4,
+        "rows": 2,
+        "enable_reviews": false,
+        "layout_mobile": "carousel"
+      }
+    },
+    "product-with-image": {
+      "type": "section-custom-content",
+      "blocks": {
+        "55af3a97-0c37-42a6-a6bd-e9ac1eb8b7da": {
+          "type": "text",
+          "settings": {
+            "subheading": "Collection",
+            "title": "THE LAGNIAPPE",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>",
+            "text_size": 3,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "text_color": "text-dark",
+            "bg_color": "#f8f8f1",
+            "button_text": "See All items",
+            "button_url": "",
+            "button_color": "btn--neutral",
+            "button_style": "hero__btn btn btn--large caps"
+          }
+        },
+        "ca14c7b9-5f77-4536-9307-b03a4eb122a0": {
+          "type": "collection",
+          "settings": {
+            "title": "THE LAGNIAPPE",
+            "section_bg": "#212121",
+            "collection": "lagniappe"
+          }
+        }
+      },
+      "block_order": [
+        "55af3a97-0c37-42a6-a6bd-e9ac1eb8b7da",
+        "ca14c7b9-5f77-4536-9307-b03a4eb122a0"
+      ],
+      "settings": {
+        "height": "screen-height-one-half",
+        "padding": false,
+        "borders": false,
+        "wrapper": false
+      }
+    },
+    "163562404667ebc8ed": {
+      "type": "section-collections-list",
+      "blocks": {
+        "163562404667ebc8ed-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "shirts",
+            "title": ""
+          }
+        },
+        "163562404667ebc8ed-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "lagniappe",
+            "title": ""
+          }
+        },
+        "163562404667ebc8ed-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "kids",
+            "title": ""
+          }
+        },
+        "163562404667ebc8ed-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "hats-beanies",
+            "title": ""
+          }
+        },
+        "be28cad3-6707-4eb0-b2b1-809a71334990": {
+          "type": "collection",
+          "settings": {
+            "collection": "books",
+            "title": ""
+          }
+        },
+        "9fdf71f3-97eb-4bd0-83b1-00866a626f8d": {
+          "type": "collection",
+          "settings": {
+            "collection": "for-the-boil",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "163562404667ebc8ed-0",
+        "163562404667ebc8ed-1",
+        "163562404667ebc8ed-2",
+        "163562404667ebc8ed-3",
+        "be28cad3-6707-4eb0-b2b1-809a71334990",
+        "9fdf71f3-97eb-4bd0-83b1-00866a626f8d"
+      ],
+      "settings": {
+        "title": "Other Collections",
+        "description": "<p><a href=\"\/collections\" title=\"All collections\">View All<\/a><\/p>",
+        "layout": "slider",
+        "aspect_ratio": 0.6,
+        "text_center": false,
+        "enable_slider": true
+      }
+    },
+    "image-with-text": {
+      "type": "section-custom-content",
+      "blocks": {
+        "image": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Screen_Shot_2021-09-30_at_12.39.49_PM.png",
+            "bg_position": "center-center",
+            "overlay_opacity": 0,
+            "overlay_color": "#000000",
+            "title": "",
+            "description": "",
+            "flex_align": "align--middle-center",
+            "text_color": "text-light",
+            "transparent": true,
+            "link_text": "",
+            "link": "",
+            "button_color": "btn--white",
+            "button_style": "hero__btn btn btn--large caps"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "subheading": "",
+            "title": "Dirty Coast",
+            "text": "<p>New Orleans is hot and sultry. While the air's heavy in humidity, the spirit is light. Down-home one minute and dressed up the next. Confusing, mysterious--even a little dangerous.<\/p><p><br\/><\/p><p>When you truly love something you share it. So: whether you were born here, are a transplant, or simply passing through, we hope you can be a New Orleanian wherever you are.<br\/><br\/><\/p><p>Founded in 2005.<\/p>",
+            "text_size": 2,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "text_color": "text-light",
+            "bg_color": "#212121",
+            "button_text": "",
+            "button_url": "",
+            "button_color": "btn--neutral",
+            "button_style": "hero__btn btn btn--large btn--outline caps"
+          }
+        }
+      },
+      "block_order": [
+        "image",
+        "text"
+      ],
+      "settings": {
+        "height": "screen-height-one-half",
+        "padding": false,
+        "borders": false,
+        "wrapper": false
+      }
+    },
+    "16578981807ffcf8bf": {
+      "type": "section-split-hero",
+      "settings": {
+        "image_height": "screen-height-full",
+        "mobile_layout": "stacked",
+        "image_desktop_left": "shopify:\/\/shop_images\/Screen_Shot_2022-05-19_at_12.48.06_PM.png",
+        "bg_position_left": "center-center",
+        "image_desktop_right": "shopify:\/\/shop_images\/2_copy.png",
+        "bg_position_right": "center-center",
+        "overlay_color": "#000",
+        "overlay_opacity": 0,
+        "title": "Split images",
+        "description": "Tell your brand's story through images.",
+        "flex_align": "align--middle-center",
+        "text_color": "text-light",
+        "transparent": true,
+        "link_text": "View products",
+        "link": "",
+        "button_color": "btn--white",
+        "button_style": "hero__btn btn btn--large btn--outline caps"
+      }
+    },
+    "16355209278c8d23ef": {
+      "type": "featured-posts",
+      "blocks": {
+        "16355209278c8d23ef-0": {
+          "type": "featured_post",
+          "settings": {
+            "featured_post": "the-dirt\/stuck-a-feather-in-his-hat-dr-john",
+            "subheading": "FROM THE JOURNAL",
+            "bg_position": "center-center"
+          }
+        }
+      },
+      "block_order": [
+        "16355209278c8d23ef-0"
+      ],
+      "settings": {
+        "show_author": false,
+        "show_date": false,
+        "show_button": true
+      }
+    },
+    "hero": {
+      "type": "section-hero",
+      "disabled": true,
+      "settings": {
+        "bg_position": "center-center",
+        "height": "screen-height-three-quarters",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "title": "Broadcast theme",
+        "description": "Modern commerce built for speed",
+        "flex_align": "align--middle-left",
+        "text_color": "text-dark",
+        "transparent": false,
+        "link_text": "View products",
+        "link": "",
+        "button_color": "btn--black",
+        "button_style": "hero__btn btn btn--input caps"
+      }
+    },
+    "logos": {
+      "type": "section-logo-list",
+      "disabled": true,
+      "blocks": {
+        "logos-0": {
+          "type": "logo-item",
+          "settings": {
+            "description": "<p>Include a brief quote from a brand that loves your products<\/p>",
+            "logo_width": 100
+          }
+        },
+        "logos-1": {
+          "type": "logo-item",
+          "settings": {
+            "description": "<p>Include a brief quote from a brand that loves your products<\/p>",
+            "logo_width": 100
+          }
+        },
+        "logos-2": {
+          "type": "logo-item",
+          "settings": {
+            "description": "<p>Include a brief quote from a brand that loves your products<\/p>",
+            "logo_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "logos-0",
+        "logos-1",
+        "logos-2"
+      ],
+      "settings": {
+        "title": "Logo list",
+        "logo_opacity": 60,
+        "text_color": "text-dark",
+        "bg_color": "#ffffff"
+      }
+    },
+    "icons": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon-0": {
+          "type": "text-item",
+          "settings": {
+            "icon_name": "icon-store",
+            "icon_color": "#545454",
+            "title": "Local Pickup",
+            "text": "Transactions are handled with bank-grade security."
+          }
+        },
+        "icon-1": {
+          "type": "text-item",
+          "settings": {
+            "icon_name": "icon-basket-return",
+            "icon_color": "#545454",
+            "title": "Free Returns",
+            "text": "Our secure checkout is quick and easy to use."
+          }
+        },
+        "icon-2": {
+          "type": "text-item",
+          "settings": {
+            "icon_name": "icon-chat",
+            "icon_color": "#545454",
+            "title": "Get in touch",
+            "text": "Have questions? Get in touch with us at any time."
+          }
+        }
+      },
+      "block_order": [
+        "icon-0",
+        "icon-1",
+        "icon-2"
+      ],
+      "settings": {
+        "text_alignment": "left",
+        "icon_size": "icon--small",
+        "icon_alignment": "icon--top",
+        "text_color": "text-dark",
+        "heading_size": "h6",
+        "height": "margin--medium",
+        "bg_color": "#fed802"
+      }
+    },
+    "newsletter": {
+      "type": "section-newsletter",
+      "disabled": true,
+      "settings": {
+        "title": "Newsletter",
+        "richtext": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.<\/p>",
+        "enable_name": true,
+        "flex_align": "align--middle-stacked",
+        "text_color": "dark",
+        "button_color": "btn--neutral",
+        "height": "three-fifty-height-hero",
+        "width": "default",
+        "bg_position": "center-center",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000"
+      }
+    },
+    "16355193663dafc113": {
+      "type": "section-map",
+      "settings": {
+        "height": "screen-height-two-thirds",
+        "title": "Visit Our Shops",
+        "address": "<p><strong>FRENCH QUARTER<\/strong><br\/>713 Royal Street<br\/>504.324.6730<\/p><p><strong>UPTOWN<br\/><\/strong>1320 Magazine Street<br\/>504.766.0752<\/p><p><strong>LOWER GARDEN DISTRICT<br\/><\/strong>1320 Magazine Street<br\/>504.766.0752<\/p><p><\/p>",
+        "button": "Directions",
+        "text_color": "text-light",
+        "bg_color": "#212121",
+        "api_key": "",
+        "map_address": "404 Beach Avenue, Vancouver, BC",
+        "zoom": 11,
+        "style": "light",
+        "image": "shopify:\/\/shop_images\/IMG_0078_copy_560x560_3c4908c9-2c1f-473b-a718-6544df189544.jpg",
+        "bg_position": "center-center",
+        "enable_latlong": false,
+        "lat": "",
+        "long": ""
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "163552000869957c2e",
+    "tabs",
+    "featured-collection",
+    "product-with-image",
+    "163562404667ebc8ed",
+    "image-with-text",
+    "16578981807ffcf8bf",
+    "16355209278c8d23ef",
+    "hero",
+    "logos",
+    "icons",
+    "newsletter",
+    "16355193663dafc113"
+  ]
+}

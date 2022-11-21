@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "list-collections",
+      "settings": {
+        "display_type": "all",
+        "title": "Our Collections | Dive Into Each",
+        "grid": 5,
+        "rows": 2,
+        "enable_reviews": false,
+        "layout_mobile": "carousel"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

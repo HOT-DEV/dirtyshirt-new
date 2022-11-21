@@ -1,0 +1,711 @@
+<!-- /templates/cart.liquid -->
+{%- assign subtotal = cart.total_price | plus: 0 -%}
+{%- assign original_subtotal = cart.original_total_price | plus: 0 -%}
+{%- assign cart_items_size = cart.item_count | plus: 0 -%}
+{%- assign cart_discount_size = cart.cart_level_discount_applications.size -%}
+{%- assign out_of_stock_product_title = '' -%}
+
+<!-- old theme setting initializations (from DC theme) -->
+{% assign has_sidebar = false %}
+
+{% if section.blocks.size > 0 %}
+  {% assign has_sidebar = true %}
+{% endif %}
+
+{% capture cart_items %}
+  {%- render 'cart-line-items' cart: cart -%}
+{% endcapture %}
+
+{% if cart_items contains '<p class="hide is-hidden" data-out-of-stock-title>' %}
+  {%- assign out_of_stock_product_title = cart_items | split: '<p class="hide is-hidden" data-out-of-stock-title>' | last | split: '</p>' | first -%}
+
+  <script>
+    window.theme.outOfStockProductTitle = {{ out_of_stock_product_title | json }};
+  </script>
+{% endif %}
+
+<div class="cart">
+  <div class="cart__form">
+    <form action="/checkout" method="post" novalidate>
+      <div class="cart__empty {% if cart_items_size > 0 %} is-hidden {% endif %}" data-empty-message>
+        <h1 class="cart__title">{{ 'cart.general.title' | t }}</h1>
+
+        <p>{{ 'cart.general.empty' | t }}</p>
+
+        <a href="{{- routes.all_products_collection_url -}}" class="btn btn--large btn--outline">{{ 'cart.general.continue_shopping' | t }}</a>
+      </div>
+
+      {{ form.errors | default_errors }}
+
+      <div class="cart__inner">
+        <div class="cart__content">
+          <h1 class="cart__title">{{ 'cart.general.title' | t }}</h1>
+
+          <a class="btn btn--outline" href="{{- routes.all_products_collection_url -}}">{{ 'cart.general.continue_shopping' | t }}</a>
+
+          <div class="cart__errors" data-cart-errors>
+            <h5 class="cart__errors__heading">{{- 'cart.general.limit_message' | t -}}</h5>
+
+            <p class="cart__errors__content" data-error-message></p>
+
+            <button type="button" class="is-not-relative" data-cart-error-close aria-label="{{ 'general.accessibility.close' | t }} {{ 'cart.general.title' | t }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close-thin" viewBox="0 0 27 27">
+                <g stroke="#979797" fill="none" fill-rule="evenodd" stroke-linecap="square">
+                  <path d="M.5.5l26 26M26.5.5l-26 26"></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+
+          <div class="cart__items" data-items-holder>
+            {{ cart_items }}
+          </div>
+          
+          {% assign donation_id = all_products[settings.donation_product].variants.first.id %}
+
+          {% assign has_donation = false %}
+          {% for item in cart.items %}
+            {% if item.id == donation_id %}
+              {% assign has_donation = true %}
+            {% endif %}
+          {% endfor %}
+          
+          <div class="cart-ordernote">
+            <span class="cart-ordernote-heading">Enter a gift note or special delivery instructions below:</span>
+            <div class="form-donate-wrap">
+              <div class="form-field">
+                <textarea class="form-field-input form-field-textarea" name="note" id="cart-note">{{ cart.note }}</textarea>
+                <label class="form-field-title" for="cart-note">{{ 'cart.general.special_instructions' | t }}</label>
+              </div>
+              {% if settings.donation_enable %}
+              <div class="donation-button{% if has_donation %} donated{% endif %}">
+                <span class="donation-message">{{settings.donation_before_text}}</span>
+                <span class="thanks-message">{{settings.donation_after_text}}</span>
+                {% include 'donation-icon' %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="cart__foot-inner cart__foot-inner--alt">
+            <span>{{- 'cart.general.subtotal_note' | t -}}</span>
+      {%- if settings.enable_estimate_shipping or true -%}
+        <div class="main_column_shipping" data-cart-widget>
+          <a href="#estimate-shipping-calculator" data-expand-button>
+            Calculate Shipping
+          </a>
+
+          <div class="cart__widget-content" id="estimate-shipping-calculator">
+            <!-- /partials/cart-shipping-calculator.liquid -->
+            {% assign calculate_shipping_btn = 'cart.shipping_calculator.calculate_shipping' | t %}
+
+            <div id="shipping-calculator" class="shipping-calculator">
+              <div class="shipping-calculator__container" id="address_container">
+                <div class="is-hidden">
+                  <label for="AddressFirstName">{{ 'customer.addresses.first_name' | t }}</label>
+                  <input type="text" id="AddressFirstName" name="address[first_name]" value="{{ form.first_name }}">
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressLastName">{{ 'customer.addresses.last_name' | t }}</label>
+                  <input type="text" id="AddressLastName" name="address[last_name]" value="{{ form.last_name }}">
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressCompany">{{ 'customer.addresses.company' | t }}</label>
+                  <input type="text" id="AddressCompany" name="address[company]" value="{{ form.company }}">
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressAddress1">{{ 'customer.addresses.address1' | t }}</label>
+                  <input type="text" id="AddressAddress1" name="address[address1]" value="{{ form.address1 }}">
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressAddress2">{{ 'customer.addresses.address2' | t }}</label>
+                  <input type="text" id="AddressAddress2" name="address[address2]" value="{{ form.address2 }}">
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressCity">{{ 'customer.addresses.city' | t }}</label>
+                  <input type="text" id="AddressCity" name="address[city]" value="{{ form.city }}">
+                </div>
+
+                <div class="p">
+                  <label for="address_country">{{ 'customer.addresses.country' | t }}</label>
+                  <select id="address_country" name="address[country]" class="cart__field" {% if shop.customer_accounts_enabled and customer %}data-default="{{ customer.default_address.country_code }}" data-default-fullname="{{ customer.default_address.country }}"{% else %}data-default="{{ default_country.iso_code }}" data-default-fullname="{{ default_country }}"{% endif %}></select>
+                </div>
+
+                <div id="address_province_container"  class="p shipping-calculator__province">
+                  <label for="address_province" id="address_province_label">{{ 'customer.addresses.province' | t }}</label>
+                  <select id="address_province" class="address_form cart__field" name="address[province]" {% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}data-default="{{ customer.default_address.province_code }}" data-default-fullname="{{ customer.default_address.province }}"{% endif %}></select>
+                </div>
+
+                <div class="p">
+                  <label for="address_zip">{{ 'customer.addresses.zip' | t }}</label>
+                  <input type="text" id="address_zip" class="cart__field" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+                </div>
+
+                <div class="is-hidden">
+                  <label for="AddressPhone">{{ 'customer.addresses.phone' | t }}</label>
+                  <input type="tel" id="AddressPhone" name="address[phone]" value="{{ form.phone }}">
+                </div>
+              </div>
+
+              <div id="wrapper-response"></div>
+
+              <input type="button" class="get-rates{% if cart.item_count > 0 %} get-rates--trigger{% endif %} btn btn--input" value="{{ calculate_shipping_btn }}" />
+            </div>
+
+            <script id="shipping-calculator-response-template" type="text/template">
+              <p id="shipping-rates-feedback" class="{% raw %}||successClass||{% endraw %}" data-template-no-shipping="{{ 'cart.shipping_calculator.no_shipping_available' | t }}">
+                {% raw %}||ratesText||{% endraw %}
+              </p>
+
+              <ul id="shipping-rates">
+                [<li><span>{% raw %}||rateName||{% endraw %}</span> <span>{% raw %}||ratePrice||{% endraw %}</span></li>]
+                {% raw %}||ratesList||{% endraw %}
+              </ul>
+            </script>
+
+          </div>
+        </div>
+      {%- endif -%}
+            
+            <div class="pickup-option">
+              <div class="border-highlight">
+                <input type="radio" name="shipping_or_pickup" id="online-shipping" value="Online Shipping" checked>
+                <label for="online-shipping">Online Shipping</label>
+              </div>
+              <div class="border-highlight">
+                <input type="radio" name="shipping_or_pickup" id="local-pickup" value="Local Pickup">
+                <label for="local-pickup">Free Local Pickup</label>
+              </div>
+            </div>
+
+            <div class="pickup-container border-highlight" style="display: none;">
+              <div class="paragraph-container">
+                <p>{{ section.settings.local_pickup_text }}</p>
+              </div>
+
+              <div class="inputs-container">
+                <div class="addresses-container">
+                  <div class="address-container border-highlight">
+                    <input type="radio" name="pickup_address" id="local-address-1" value="5631 Magazine St." checked>
+                    <label for="local-address-1">UPTOWN <span>5631 Magazine St</span></label>
+                  </div>
+                  <div class="address-container border-highlight">
+                    <input type="radio" name="pickup_address" id="local-address-2" value="1320 Magazine St.">
+                    <label for="local-address-2">LOWER GARDEN DISTRICT <span>1320 Magazine St</span></label>
+                  </div>
+<!--                   <div class="address-container border-highlight">
+                    <input type="radio" name="pickup_address" id="local-address-3" value="713 Royal St.">
+                    <label for="local-address-3">FRENCH QUARTER <span>713 Royal St</span></label>
+                  </div> -->
+                </div>
+                <input type="text" name="name" placeholder="Full Name" class="border-highlight">
+                <input type="email" name="email" placeholder="Email" class="border-highlight">
+              </div>
+
+            </div>
+            
+            <button type="submit" name="update" class="btn btn--full btn--large btn--outline cart__checkout no-js">
+              {{- 'cart.general.update' | t -}}
+            </button>
+
+            <button type="submit" name="checkout" class="btn btn--full btn--large cart__checkout">
+              {{- 'cart.general.checkout' | t -}}
+            </button>
+          </div>
+        </div>
+
+        <div class="cart__aside {% if cart_items_size <= 0 %} is-hidden{% endif %}" data-foot-holder>
+          {% assign free_shipping_text = block.settings.message | default: settings.message %}
+{% assign is_enable = false %}
+{% assign show_wheel = true %}
+
+{% if block.settings.show_wheel == false %}
+  {% assign show_wheel = false %}
+{% endif %}
+
+{% if block.settings.message != blank %}
+  {% assign is_enable = true %}
+{% endif %}
+
+{% if settings.show_free_shipping_message and settings.free_shipping_limit != blank and free_shipping_text != blank %}
+  {% assign is_enable = true %}
+{% endif %}
+
+{% if is_enable %}
+  {% assign limit = settings.free_shipping_limit | plus: 0 %}
+  {% assign limit_currency = limit | times: 100 %}
+  {% assign subtotal_without_currency = cart.total_price | plus: 0 | divided_by: 100 %}
+
+  {% capture left_to_spend %}
+    <span data-left-to-spend>{{ limit_currency | minus: cart.total_price | money_without_trailing_zeros }}</span>
+  {% endcapture %}
+
+  {% assign free_shipping_message = free_shipping_text | replace: '||amount||', left_to_spend %}
+  {% assign qualified_shipping_message = 'cart.general.qualified_shipping_message' | t %}
+  {% assign class_message = '' %}
+
+  {% if subtotal_without_currency >= limit %}
+    {% if qualified_shipping_message != blank %}
+      {% assign class_message = 'is-success' %}
+    {% else %}
+      {% assign class_message = 'is-hidden' %}
+    {% endif %}
+  {% elsif subtotal_without_currency == 0 %}
+    {% assign class_message = 'is-hidden' %}
+  {% endif %}
+
+  <p class="cart-dropdown__message cart__message {{ class_message }}" {{ block_attibutes }} data-cart-message="{% if qualified_shipping_message != blank %}true{% else %}false{% endif %}" data-limit="{{ limit }}">
+    {% if show_wheel %}  
+      {% assign percent = limit | minus: subtotal_without_currency | times: 100 | divided_by: limit %}
+      {% assign percent = 100 | minus: percent %}
+
+      {% if percent > 100 %}
+        {% assign percent = 100 %}
+      {% endif %}
+
+      <small class="cart__graph">
+        <small class="cart__graph-dot cart__graph-dot--1"></small>
+        <small class="cart__graph-dot cart__graph-dot--2"></small>
+        <small class="cart__graph-dot cart__graph-dot--3"></small>
+        <small class="cart__graph-dot cart__graph-dot--4"></small>
+        <small class="cart__graph-dot cart__graph-dot--5"></small>
+        <small class="cart__graph-dot cart__graph-dot--6"></small>
+        
+        <svg height="18" width="18">
+          <circle r="7" cx="9" cy="9" />
+          <circle class="cart__graph-progress" stroke-dasharray="87.96459430051421 87.96459430051421" style="stroke-dashoffset: 87.96459430051421" data-cart-progress data-percent="{{- percent -}}" r="7" cx="9" cy="9" />
+        </svg>
+      </small>
+    {% endif %}
+
+    {% if qualified_shipping_message != blank %}
+      <span class="cart__message-success">{{ qualified_shipping_message }}</span>
+    {% endif %}
+
+    <span class="cart__message-default">
+      {{ free_shipping_message }}
+    </span>
+  </p>
+{% endif %}
+
+          <div class="cart__total {% if original_subtotal < subtotal or cart_discount_size <= 0 %} is-hidden{% endif %}" data-cart-original-total>
+            <span>{{- 'cart.general.subtotal_items' | t -}}</span>
+
+            <span data-cart-original-total-price>
+              {{- original_subtotal | money -}}
+            </span>
+          </div>
+
+          <div class="cart__discounts {% if cart_discount_size <= 0 %} is-hidden{% endif %}" data-cart-discounts-holder>
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="cart__total" data-cart-discount>
+                  <span data-cart-discount-title>
+                    {{- discount.title -}}
+                  </span>
+
+                  <span data-cart-discount-price>
+                    -{{- discount.total_allocated_amount | money -}}
+                  </span>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+
+          <div class="cart__total">
+            <span>{{- 'cart.general.subtotal' | t -}}</span>
+
+            <span data-cart-total class="cart__total__money">
+              {{- subtotal | money -}}
+            </span>
+          </div>
+
+          {%- for block in section.blocks -%}
+            {% unless block.type == "richtext" or block.type == "image" or block.type == "page" %}
+              {%- render block -%}
+            {% endunless %}
+          {%- endfor -%}
+
+          {% if settings.enable_order_notes %}
+            <div class="cart__widget" data-cart-widget>
+              <a href="#notes" data-expand-button>
+                {{- 'cart.general.cart_notes_label' | t -}}
+              </a>
+
+              <div class="cart__widget-content" id="notes">
+                <label for="note">{{ 'cart.general.customer_note' | t }}</label>
+
+                <textarea id="note" name="note" class="cart__field cart__field--textarea"  aria-label="{{ 'cart.general.customer_note' | t }}">{{- cart.note -}}</textarea>
+              </div>
+            </div>
+          {% endif %}
+
+          {%- if settings.enable_estimate_shipping and false -%}
+            <div class="cart__widget js" data-cart-widget>
+              <a href="#estimate-shipping-calculator" data-expand-button>
+                {{- 'cart.general.estimate_shipping_label' | t -}}
+              </a>
+
+              <div class="cart__widget-content" id="estimate-shipping-calculator">
+                <!-- /partials/cart-shipping-calculator.liquid -->
+                {% assign calculate_shipping_btn = 'cart.shipping_calculator.calculate_shipping' | t %}
+
+                <div id="shipping-calculator" class="shipping-calculator">
+                  <div class="shipping-calculator__container" id="address_container">
+                    <div class="is-hidden">
+                      <label for="AddressFirstName">{{ 'customer.addresses.first_name' | t }}</label>
+                      <input type="text" id="AddressFirstName" name="address[first_name]" value="{{ form.first_name }}">
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressLastName">{{ 'customer.addresses.last_name' | t }}</label>
+                      <input type="text" id="AddressLastName" name="address[last_name]" value="{{ form.last_name }}">
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressCompany">{{ 'customer.addresses.company' | t }}</label>
+                      <input type="text" id="AddressCompany" name="address[company]" value="{{ form.company }}">
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressAddress1">{{ 'customer.addresses.address1' | t }}</label>
+                      <input type="text" id="AddressAddress1" name="address[address1]" value="{{ form.address1 }}">
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressAddress2">{{ 'customer.addresses.address2' | t }}</label>
+                      <input type="text" id="AddressAddress2" name="address[address2]" value="{{ form.address2 }}">
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressCity">{{ 'customer.addresses.city' | t }}</label>
+                      <input type="text" id="AddressCity" name="address[city]" value="{{ form.city }}">
+                    </div>
+
+                    <div class="p">
+                      <label for="address_country">{{ 'customer.addresses.country' | t }}</label>
+                      <select id="address_country" name="address[country]" class="cart__field" {% if shop.customer_accounts_enabled and customer %}data-default="{{ customer.default_address.country_code }}" data-default-fullname="{{ customer.default_address.country }}"{% else %}data-default="{{ default_country.iso_code }}" data-default-fullname="{{ default_country }}"{% endif %}></select>
+                    </div>
+
+                    <div id="address_province_container"  class="p shipping-calculator__province">
+                      <label for="address_province" id="address_province_label">{{ 'customer.addresses.province' | t }}</label>
+                      <select id="address_province" class="address_form cart__field" name="address[province]" {% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}data-default="{{ customer.default_address.province_code }}" data-default-fullname="{{ customer.default_address.province }}"{% endif %}></select>
+                    </div>
+
+                    <div class="p">
+                      <label for="address_zip">{{ 'customer.addresses.zip' | t }}</label>
+                      <input type="text" id="address_zip" class="cart__field" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+                    </div>
+
+                    <div class="is-hidden">
+                      <label for="AddressPhone">{{ 'customer.addresses.phone' | t }}</label>
+                      <input type="tel" id="AddressPhone" name="address[phone]" value="{{ form.phone }}">
+                    </div>
+                  </div>
+
+                  <div id="wrapper-response"></div>
+
+                  <input type="button" class="get-rates{% if cart.item_count > 0 %} get-rates--trigger{% endif %} btn btn--outline btn--input btn--full" value="{{ calculate_shipping_btn }}" />
+                </div>
+
+                <script id="shipping-calculator-response-template" type="text/template">
+                  <p id="shipping-rates-feedback" class="{% raw %}||successClass||{% endraw %}" data-template-no-shipping="{{ 'cart.shipping_calculator.no_shipping_available' | t }}">
+                    {% raw %}||ratesText||{% endraw %}
+                  </p>
+
+                  <ul id="shipping-rates">
+                    [<li><span>{% raw %}||rateName||{% endraw %}</span> <span>{% raw %}||ratePrice||{% endraw %}</span></li>]
+                    {% raw %}||ratesList||{% endraw %}
+                  </ul>
+                </script>
+
+              </div>
+            </div>
+          {%- endif -%}
+
+          {% if has_sidebar %}
+          <div class="cart__sidebar">
+            {% for block in section.blocks %}
+            {% if block.type == 'image' %}
+            {% assign image = block.settings.image %}
+
+            <article class="cart-sidebar-item">
+              {% if image %}
+              {%
+                        include 'rimg',
+              img: image,
+              class: 'cart-sidebar-item-image',
+              size: '445x',
+              lazy: settings.lazy_load,
+              canvas: settings.lazy_load
+              %}
+              {% else %}
+              {{ 'image' | placeholder_svg_tag: 'placeholder--image cart-sidebar-item-image' }}
+              {% endif %}
+            </article>
+            {% endif %}
+
+            {% if block.type == 'richtext' %}
+            <article class="cart-sidebar-item cart-sidebar-item--text rte">
+              {{ block.settings.richtext }}
+            </article>
+            {% endif %}
+
+            {% if block.type == 'page' %}
+            <article class="cart-sidebar-item cart-sidebar-item--text rte">
+              {{ pages[block.settings.page].content }}
+            </article>
+            {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+          {%- if settings.enable_additional_buttons and additional_checkout_buttons -%}
+            <span class="cart__or">&mdash; {{ 'cart.general.or' | t }} &mdash;</span>
+
+            <div class="additional-checkout-buttons">
+              {{- content_for_additional_checkout_buttons -}}
+            </div>
+          {%- endif -%}
+
+          <div class="cart__widget cart__widget--products is-hidden" data-pair-products-holder>
+            <p>{{- 'cart.general.pair_products' | t -}}</p>
+
+            <div class="cart__widget-content">
+              <div class="cart__widget-content-inner" data-pair-products></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  /* Animations */
+  .fadeIn {
+    animation: fadeIn 0.5s ease-in both;
+    -webkit-animation: fadeIn 0.5s ease-in both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+  }
+  @-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+  }
+
+  .fadeOut {
+    animation: fadeOut 0.5s ease-out both;
+    -webkit-animation: fadeOut 0.5s ease-out both;
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; }
+  }
+  @-webkit-keyframes fadeOut {
+    to { opacity: 0; }
+  }
+  @media (max-width:767px){
+    .popup-content {
+      width: 90%;
+    }
+  }
+
+  .cart-ordernote {
+    width: 100%;
+    margin: 15px 0 25px;
+  }
+  
+  .cart-ordernote-heading {
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .form-donate-wrap {
+    display: flex;
+  }
+  
+  .cart-ordernote .form-field {
+    flex-basis: 450px;
+    margin: 0 20px 0 0;
+  }
+  
+  .cart-ordernote .form-field textarea {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .donation-button {
+    border: 2px solid #fed800;
+    background: #000;
+    color: #fff;
+    padding: 20px;
+    max-width: 50%;
+    margin-left: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    font-size: 15px;
+  }
+  
+  .donation-button > span {
+    width: 75%;
+    padding-right: 15px;
+  }
+  
+  .donation-button .thanks-message {
+	display: none;
+  }
+  
+  .donation-button .krewe {
+    color: #fed800;
+    font-weight: bold;
+  }
+  
+  .donated.donation-button .donation-message {
+	display: none;
+  }
+  
+  .donated.donation-button .thanks-message {
+	display: inline;
+  }
+
+  .donation-button svg {
+    height: 50px;
+  }
+  
+  .donation-button svg path {
+    fill: #fff;
+  }
+  
+  .donation-button.is-loading:before,
+  .donation-button.is-loading:hover:before {
+    border-color: #fff;
+  }
+  
+  @media (max-width: 767px) {
+    .form-donate-wrap {
+      flex-wrap: wrap;
+    }
+    
+    .donation-button {
+      margin-top: 15px;
+      margin-left: 0;
+      max-width: 100%;
+    }
+    
+    .cart-ordernote .form-field {
+      margin: 0;
+      max-width: none;
+      flex-basis: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_order_notes",
+      "label": "Enable order notes text box",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Shipping estimator"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shipping_calc",
+      "label": "Enable shipping estimator",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_calc_default_country",
+      "label": "Default country",
+      "default": "United States"
+    },
+    {
+      "type": "header",
+      "content": "Local Pickup"
+    },
+    {
+      "type": "textarea",
+      "id": "local_pickup_text",
+      "label": "Local Pickup Text"
+    },
+    {
+      "type": "header",
+      "content": "Local Pickup popup message"
+    },
+	{
+      "type": "text",
+      "id": "popupTitle",
+      "label": "Popup title",
+	  "default":"To finish local pick-up"
+    },
+    {
+      "type": "textarea",
+      "id": "popupDescription",
+      "label": "Popup Description",
+	  "default": "We have to charge you shipping at checkout, but don't worry. After email you to confirm your pick-up location we will REFUND YOUR SHIPPING once the order is ready for pick-up."
+    },
+    {
+      "type": "text",
+      "id": "popupButton",
+      "label": "Popup button",
+	  "default": "Finish Checkout"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "richtext",
+      "name": "Rich text",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "richtext",
+          "type": "richtext",
+          "label": "Rich text",
+          "default": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news and seasonal promotions.</p>"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "image",
+          "type": "image_picker",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "page",
+          "type": "page",
+          "label": "Choose page"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

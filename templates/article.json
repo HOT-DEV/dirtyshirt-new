@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "article",
+      "blocks": {
+        "related-products": {
+          "type": "related",
+          "settings": {
+            "title": "Related products"
+          }
+        },
+        "recent-articles": {
+          "type": "recent",
+          "settings": {
+            "title": "Recent Articles"
+          }
+        }
+      },
+      "block_order": [
+        "related-products",
+        "recent-articles"
+      ],
+      "settings": {
+        "bg_position": "center-center",
+        "image_height": "screen-height-two-thirds",
+        "show_date": false,
+        "show_author": false,
+        "tags": false,
+        "social": false,
+        "arrows": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

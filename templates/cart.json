@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart",
+      "blocks": {
+        "a1a767df-03d7-4383-a58e-44615b447d94": {
+          "type": "richtext",
+          "settings": {
+            "richtext": "<p><strong>IN-STORE PICKUP!<br\/><\/strong><br\/>Once you have items in your cart use the form below to select in-store pickup. Please read all the information, and completely fill out the form so we can process your order for pickup<strong>. <\/strong><\/p><p><strong>We'll refund any shipping costs after your order is fulfilled<\/strong> and call or email you when your order is ready at the location of your choice!<br\/><br\/>For more information on shipping services, check out our <a href=\"https:\/\/dirtycoast.com\/pages\/shipping-returns\">shipping policy page or email us <\/a>at shipping@dirtycoast.com if you have any questions!<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a1a767df-03d7-4383-a58e-44615b447d94"
+      ],
+      "settings": {
+        "enable_order_notes": true,
+        "enable_shipping_calc": true,
+        "shipping_calc_default_country": "United States",
+        "local_pickup_text": "<strong>CHOOSE THE STORE YOU WISH FOR LOCAL PICKUP.<\/strong><br><br><br><span><strong>Please fill out this form using the same Name and Email Address used at checkout. <br><br>Your shipping costs will be refunded once the order is fulfilled.<br><\/strong><\/span>",
+        "popupTitle": "Please Note:",
+        "popupDescription": "For in-store pick up, you will be charged shipping costs at checkout to secure your order. <span><strong>All Shipping Costs will be refunded <\/strong> after your order is fulfilled.<\/span> You will receive an email confirmation from our shipping team with instructions and information regarding your in-store pick up order.",
+        "popupButton": "Finish Checkout"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
